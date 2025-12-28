@@ -16,7 +16,7 @@ export default async function Home() {
     {
       username: "jaesun",
       title: "Chatterbox 4000",
-      stat: "240k",
+      stat: "240,616",
       description: "chat messages sent",
     },
     {
@@ -28,7 +28,7 @@ export default async function Home() {
     {
       username: "ecua",
       title: "Salesman of the Year",
-      stat: "185k",
+      stat: "185,040",
       description: "sales made",
     },
     {
