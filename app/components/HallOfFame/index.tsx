@@ -1,0 +1,64 @@
+import { HALL_OF_FAME_NAMES } from "./constants";
+
+// Split names into 4 rows
+const chunkSize = Math.ceil(HALL_OF_FAME_NAMES.length / 4);
+const row1 = HALL_OF_FAME_NAMES.slice(0, chunkSize);
+const row2 = HALL_OF_FAME_NAMES.slice(chunkSize, chunkSize * 2);
+const row3 = HALL_OF_FAME_NAMES.slice(chunkSize * 2, chunkSize * 3);
+const row4 = HALL_OF_FAME_NAMES.slice(chunkSize * 3);
+
+interface MarqueeRowProps {
+  names: string[];
+  speed: number; // duration in seconds
+}
+
+function MarqueeRow({ names, speed }: MarqueeRowProps) {
+  const nameElements = names.map((name, index) => (
+    <span key={`${name}-${index}`} className="font-body text-stone-700 text-sm">
+      {name}
+    </span>
+  ));
+
+  return (
+    <div className="relative overflow-hidden py-3">
+      {/* Left fade gradient */}
+      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-stone-50 to-transparent z-10 pointer-events-none" />
+
+      {/* Scrolling content - duplicated for seamless loop */}
+      <div
+        className="flex whitespace-nowrap"
+        style={{
+          animation: `marquee ${speed}s linear infinite`,
+        }}
+      >
+        {/* First copy - wrapped with gap inside and padding-right to match gap */}
+        <div className="flex gap-6 shrink-0 pr-6">{nameElements}</div>
+        {/* Second copy for seamless loop */}
+        <div className="flex gap-6 shrink-0 pr-6">{nameElements}</div>
+      </div>
+
+      {/* Right fade gradient */}
+      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-stone-50 to-transparent z-10 pointer-events-none" />
+    </div>
+  );
+}
+
+export default function HallOfFame() {
+  return (
+    <section className="mt-10">
+      <h2 className="font-heading text-2xl font-extrabold text-stone-900 mb-1">
+        Hall of Fame
+      </h2>
+      <p className="font-body text-stone-700 mb-4">
+        Honoring those who stayed with us on the Discord until the end.
+      </p>
+
+      <div className="overflow-hidden">
+        <MarqueeRow names={row1} speed={48} />
+        <MarqueeRow names={row2} speed={38} />
+        <MarqueeRow names={row3} speed={48} />
+        <MarqueeRow names={row4} speed={38} />
+      </div>
+    </section>
+  );
+}
