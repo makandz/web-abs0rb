@@ -1,3 +1,4 @@
+import Link from "next/link";
 import FeaturedCreators from "./components/FeaturedCreators";
 import HallOfFame from "./components/HallOfFame";
 import LeaderboardSection from "./components/LeaderboardSection";
@@ -69,15 +70,18 @@ export default async function Home() {
             </p>
           </div>
 
-          {/* Coming Soon Badge */}
-          <div className="mt-6 inline-flex items-center gap-3 rounded-lg border border-blue-200 bg-blue-50 px-4 py-3">
+          {/* User Lookup Link */}
+          <Link
+            href="/users"
+            className="mt-6 inline-flex items-center gap-3 rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 transition-colors hover:bg-blue-100 hover:border-blue-300"
+          >
             <span className="inline-flex items-center rounded-full bg-blue-500 px-3 py-1 text-xs font-semibold text-white whitespace-nowrap">
-              COMING SOON
+              USER LOOKUP
             </span>
             <span className="font-body text-sm text-blue-900">
-              User lookup coming soon, a way to search for your own stats!
+              Search for your stats by username
             </span>
-          </div>
+          </Link>
         </header>
 
         {/* Core Stats Section */}
