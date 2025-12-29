@@ -170,7 +170,7 @@ export default function UserSearch({
               onChange={(e) => handleSearchChange(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Enter username..."
-              className="w-full rounded-lg border border-stone-300 bg-transparent px-4 py-3 font-body text-stone-900 placeholder-stone-400 focus:border-stone-500 focus:outline-none focus:ring-2 focus:ring-stone-200"
+              className="w-full rounded-lg border border-stone-300 bg-white px-4 py-3 font-body text-stone-900 placeholder-stone-400 focus:border-stone-500 focus:outline-none focus:ring-2 focus:ring-stone-200"
               autoComplete="off"
               autoFocus={autoFocus}
             />
@@ -230,4 +230,3 @@ export default function UserSearch({
     </form>
   );
 }
-

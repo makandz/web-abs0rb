@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Manrope, Roboto } from "next/font/google";
 import "./globals.css";
 
@@ -20,6 +21,9 @@ export const metadata: Metadata = {
     "Archive of abs0rb.me, an online multiplayer game that ran from 2015 to 2025.",
 };
 
+const cloudflareWebAnalyticsToken =
+  process.env.NEXT_PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,6 +33,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${manrope.variable} ${roboto.variable} antialiased`}>
         {children}
+        {cloudflareWebAnalyticsToken ? (
+          <Script
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({
+              token: cloudflareWebAnalyticsToken,
+            })}
+            strategy="afterInteractive"
+          />
+        ) : null}
       </body>
     </html>
   );
