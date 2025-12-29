@@ -1,6 +1,7 @@
 import FeaturedCreators from "./components/FeaturedCreators";
 import HallOfFame from "./components/HallOfFame";
 import LeaderboardSection from "./components/LeaderboardSection";
+import Tribute from "./components/Tribute";
 
 export default async function Home() {
   const stats = [
@@ -27,7 +28,7 @@ export default async function Home() {
     },
     {
       username: "ecua",
-      title: "Salesman of the Year",
+      title: "Salesman of the Decade",
       stat: "185,040",
       description: "sales made",
     },
@@ -141,6 +142,9 @@ export default async function Home() {
 
         {/* Featured Creators Section */}
         <FeaturedCreators />
+
+        {/* Tribute Section */}
+        <Tribute />
 
         {/* End of Archive */}
         <footer className="mt-10 border-t border-stone-200 pt-8">
