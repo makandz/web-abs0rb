@@ -114,8 +114,7 @@ function formatDuration(seconds: number | undefined | null): string {
 async function getUserData(id: number): Promise<UserData | null> {
   try {
     const path = getUserDataPath(id);
-    const baseUrl =
-      process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000";
+    const baseUrl = process.env.VERCEL_URL || "http://localhost:3000";
     const response = await fetch(`${baseUrl}${path}`, { cache: "force-cache" });
 
     if (!response.ok) return null;
@@ -207,19 +206,12 @@ export default async function UserPage({
       <main className="mx-auto max-w-4xl">
         {/* Back Navigation */}
         <Link
-          href="/users"
+          href="/"
           className="inline-flex items-center gap-1 font-body text-sm text-stone-500 hover:text-stone-700 mb-8"
         >
-          <span>←</span> Back to Search
-        </Link>{" "}
-        (
-        <Link
-          href="/"
-          className="font-body text-sm text-stone-500 hover:text-stone-700"
-        >
-          or back to the archive
+          <span>←</span> Back to the Archive
         </Link>
-        ){/* Header Section */}
+        {/* Header Section */}
         <header className="mb-10">
           <h1 className="font-heading text-4xl font-extrabold tracking-tight text-stone-900 sm:text-5xl mb-2">
             {user.display || user.username}

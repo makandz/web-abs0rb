@@ -1,8 +1,8 @@
-import Link from "next/link";
 import FeaturedCreators from "./components/FeaturedCreators";
 import HallOfFame from "./components/HallOfFame";
 import LeaderboardSection from "./components/LeaderboardSection";
 import Tribute from "./components/Tribute";
+import UserSearch from "./components/UserSearch";
 
 export default async function Home() {
   const stats = [
@@ -69,20 +69,19 @@ export default async function Home() {
               during its lifetime.
             </p>
           </div>
-
-          {/* User Lookup Link */}
-          <Link
-            href="/users"
-            className="mt-6 inline-flex items-center gap-3 rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 transition-colors hover:bg-blue-100 hover:border-blue-300"
-          >
-            <span className="inline-flex items-center rounded-full bg-blue-500 px-3 py-1 text-xs font-semibold text-white whitespace-nowrap">
-              USER LOOKUP
-            </span>
-            <span className="font-body text-sm text-blue-900">
-              Search for your stats by username
-            </span>
-          </Link>
         </header>
+
+        {/* User Search Section */}
+        <section className="mb-12">
+          <h2 className="font-heading text-2xl font-extrabold text-stone-900 mb-4">
+            Search Your Stats
+          </h2>
+          <p className="font-body text-sm text-stone-600 mb-4">
+            Search for any Abs0rb.me user by their username to view their stats
+            and activity.
+          </p>
+          <UserSearch showLabel={false} />
+        </section>
 
         {/* Core Stats Section */}
         <section>
