@@ -101,6 +101,14 @@ function formatNumber(num: number | undefined | null): string {
   return num.toLocaleString();
 }
 
+function formatNumberMillions(num: number | undefined | null): string {
+  if (num == null) return "0";
+  if (Math.abs(num) < 1_000_000) return num.toLocaleString();
+
+  const millions = (num / 1_000_000).toFixed(2).replace(/\.?0+$/, "");
+  return `${millions}M`;
+}
+
 function formatDuration(seconds: number | undefined | null): string {
   if (seconds == null) return "0m";
   const hours = Math.floor(seconds / 3600);
@@ -129,11 +137,21 @@ async function getUserData(id: number): Promise<UserData | null> {
 }
 
 // Component for stat cards
-function StatCard({ value, label }: { value: string | number; label: string }) {
+function StatCard({
+  value,
+  label,
+  format,
+}: {
+  value: string | number;
+  label: string;
+  format?: (value: number) => string;
+}) {
   return (
     <div className="rounded-lg border border-stone-200 bg-white p-4">
       <div className="font-heading text-3xl font-bold text-stone-900">
-        {typeof value === "number" ? formatNumber(value) : value}
+        {typeof value === "number"
+          ? (format ? format(value) : formatNumber(value))
+          : value}
       </div>
       <div className="mt-1 font-body text-sm text-stone-600">{label}</div>
     </div>
@@ -229,15 +247,28 @@ export default async function UserPage({
             Core Stats
           </h2>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            <StatCard value={user.coins} label="Coins" />
-            <StatCard value={user.views} label="Account Views" />
+            <StatCard value={user.coins} label="Coins" format={formatNumberMillions} />
+            <StatCard
+              value={user.views}
+              label="Account Views"
+              format={formatNumberMillions}
+            />
             <StatCard
               value={Math.floor(user.total_xp / 1000) + 1}
               label="Level"
+              format={formatNumberMillions}
             />
-            <StatCard value={user.total_xp} label="Total XP" />
-            <StatCard value={totals.days_played} label="Days Played" />
-            <StatCard value={totals.items_owned} label="Items Owned" />
+            <StatCard value={user.total_xp} label="Total XP" format={formatNumberMillions} />
+            <StatCard
+              value={totals.days_played}
+              label="Days Played"
+              format={formatNumberMillions}
+            />
+            <StatCard
+              value={totals.items_owned}
+              label="Items Owned"
+              format={formatNumberMillions}
+            />
           </div>
         </section>
         {/* Activity Timeline */}
