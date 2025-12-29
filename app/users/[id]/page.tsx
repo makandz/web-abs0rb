@@ -114,7 +114,7 @@ function formatDuration(seconds: number | undefined | null): string {
 async function getUserData(id: number): Promise<UserData | null> {
   try {
     const path = getUserDataPath(id);
-    const baseUrl = process.env.VERCEL_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const response = await fetch(`${baseUrl}${path}`, { cache: "force-cache" });
 
     if (!response.ok) return null;
