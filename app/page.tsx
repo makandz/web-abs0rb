@@ -77,8 +77,8 @@ export default async function Home() {
             Search Your Stats
           </h2>
           <p className="font-body text-sm text-stone-600 mb-4">
-            Search for any Abs0rb.me user by their username to view their stats
-            and activity.
+            Search for any user by their username to view their stats and
+            activity.
           </p>
           <UserSearch showLabel={false} />
         </section>
