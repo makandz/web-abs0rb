@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Manrope, Roboto } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -21,8 +21,7 @@ export const metadata: Metadata = {
     "Archive of abs0rb.me, an online multiplayer game that ran from 2015 to 2025.",
 };
 
-const cloudflareWebAnalyticsToken =
-  process.env.NEXT_PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN;
+const cloudflareWebAnalyticsToken = "d6d5e83ed9fa4c4e9fec1c59e7e7df18";
 
 export default function RootLayout({
   children,
