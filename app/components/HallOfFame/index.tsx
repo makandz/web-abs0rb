@@ -1,11 +1,15 @@
 import { HALL_OF_FAME_NAMES } from "./constants";
 
-// Split names into 4 rows
-const chunkSize = Math.ceil(HALL_OF_FAME_NAMES.length / 4);
-const row1 = HALL_OF_FAME_NAMES.slice(0, chunkSize);
-const row2 = HALL_OF_FAME_NAMES.slice(chunkSize, chunkSize * 2);
-const row3 = HALL_OF_FAME_NAMES.slice(chunkSize * 2, chunkSize * 3);
-const row4 = HALL_OF_FAME_NAMES.slice(chunkSize * 3);
+function shuffleNames(names: string[]) {
+  const shuffledNames = [...names];
+
+  for (let i = shuffledNames.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledNames[i], shuffledNames[j]] = [shuffledNames[j], shuffledNames[i]];
+  }
+
+  return shuffledNames;
+}
 
 interface MarqueeRowProps {
   names: string[];
@@ -44,6 +48,13 @@ function MarqueeRow({ names, speed }: MarqueeRowProps) {
 }
 
 export default function HallOfFame() {
+  const randomizedNames = shuffleNames(HALL_OF_FAME_NAMES);
+  const chunkSize = Math.ceil(randomizedNames.length / 4);
+  const row1 = randomizedNames.slice(0, chunkSize);
+  const row2 = randomizedNames.slice(chunkSize, chunkSize * 2);
+  const row3 = randomizedNames.slice(chunkSize * 2, chunkSize * 3);
+  const row4 = randomizedNames.slice(chunkSize * 3);
+
   return (
     <section className="mt-10">
       <h2 className="font-heading text-2xl font-extrabold text-stone-900 mb-1">
