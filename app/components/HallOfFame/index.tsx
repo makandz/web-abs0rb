@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+
 import { HALL_OF_FAME_NAMES } from "./constants";
 
 function shuffleNames(names: string[]) {
@@ -48,12 +52,25 @@ function MarqueeRow({ names, speed }: MarqueeRowProps) {
 }
 
 export default function HallOfFame() {
-  const randomizedNames = shuffleNames(HALL_OF_FAME_NAMES);
-  const chunkSize = Math.ceil(randomizedNames.length / 4);
-  const row1 = randomizedNames.slice(0, chunkSize);
-  const row2 = randomizedNames.slice(chunkSize, chunkSize * 2);
-  const row3 = randomizedNames.slice(chunkSize * 2, chunkSize * 3);
-  const row4 = randomizedNames.slice(chunkSize * 3);
+  const [randomizedNames, setRandomizedNames] = useState(HALL_OF_FAME_NAMES);
+
+  useEffect(() => {
+    // Shuffle client-side so static rendering (and any caching) uses the deterministic order
+    // while the browser sees a fresh permutation on each load.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setRandomizedNames(shuffleNames(HALL_OF_FAME_NAMES));
+  }, []);
+
+  const [row1, row2, row3, row4] = useMemo(() => {
+    const chunkSize = Math.ceil(randomizedNames.length / 4);
+
+    return [
+      randomizedNames.slice(0, chunkSize),
+      randomizedNames.slice(chunkSize, chunkSize * 2),
+      randomizedNames.slice(chunkSize * 2, chunkSize * 3),
+      randomizedNames.slice(chunkSize * 3),
+    ];
+  }, [randomizedNames]);
 
   return (
     <section className="mt-10">
